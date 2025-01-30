@@ -1,5 +1,4 @@
 import axios from "axios";
-import config from "../config.js";
 
 export async function createPost(post) {
   try {

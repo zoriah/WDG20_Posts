@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { getPostById } from "../mock/posts";
 
-const PostDetails = ({ id }) => {
+const PostDetails = () => {
   const [title, setTitle] = useState("");
-
+  const { postId } = useParams();
+  console.log("Hello World");
   useEffect(() => {
-    const fetchedPost = getPostById(id);
+    const fetchedPost = getPostById(postId);
     setTitle(fetchedPost.title);
-  }, [id]);
+  }, []);
 
   return (
     <div>
