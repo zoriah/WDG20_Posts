@@ -1,5 +1,6 @@
 // Import express and the db file just for side effects (to connect to the database)
 import express from 'express';
+import cors from "cors";
 import './db/index.js';
 
 import Post from "./models/Post.js";
@@ -7,9 +8,11 @@ import Post from "./models/Post.js";
 // Create an express app
 const app = express();
 // Set a port from the environment variable or default to 8080
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 // This line lets us use the JSON body of a request in our routes as req.body
 app.use(express.json());
+// Eingehende JSON-Anfragen zu parsen.
+app.use(cors())
 // app.route() helps us define handlers for different HTTP methods on the same route
 app
   .route('/posts')
@@ -61,7 +64,7 @@ app
       }
 
       await post.destroy();
-      res.json({ message: 'Post deleted successfully' });
+      res.json({ message: 'Post deleted successfully', data: post });
     } catch (error) {
       console.error('Error deleting post:', error);
       res.status(500).json({ message: 'Internal server error' });
