@@ -12,6 +12,7 @@ const App = () => {
           {/* <Route path="postcreate" element={<PostCreate />} /> */}
           {/* <Route path="postcard/:postId" element={<PostDetails />} /> */}
           <Route path="testpostdetails" element={<PostDetails />} />
+          <Route path="/post/:id" component={PostDetails} />
 
           <Route path="*" element={<h2>Not Found</h2>} />
         </Route>
