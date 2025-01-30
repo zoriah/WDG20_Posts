@@ -1,26 +1,28 @@
-import {useEffect, useState} from "react";
-import {getPosts} from "../mock/testPosts.js";
-import {Spinner} from "./Spinner.jsx";
-import {PostCard} from "./PostCard.jsx";
+import { useEffect, useState } from "react";
+// import {getPosts} from "../mock/testPosts.js";
+import { Spinner } from "./Spinner.jsx";
+import { PostCard } from "./PostCard.jsx";
+import axios from "axios"
 
 export function CardList() {
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const fetchPosts = async () => {
+        setIsLoading(true);
+        try {
+            const fetchPosts = await axios.get(import.meta.env.VITE_BACKEND + "/posts")
+            setPosts(fetchPosts.data.getPosts);
+            console.log(fetchPosts.data.getPosts)
 
+        } catch (err) {
+            console.error(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+        // fetchPosts()
+    }
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                setIsLoading(true);
-                const data = await getPosts();
-                setPosts(data);
-            } catch (err) {
-                console.error(err.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchPosts();
+        fetchPosts()
     }, []);
 
     return isLoading ? (
