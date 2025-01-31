@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {deletePostById, getPostById, getPosts, updatePostById} from "../api/posts.js";
+import {deletePostById, getPostById, updatePostById} from "../api/posts.js";
 import {Spinner} from "./Spinner.jsx";
 
 const PostDetails = () => {

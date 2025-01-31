@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {createPost, deletePostById, updatePostById} from "../api/posts.js";
+import {createPost} from "../api/posts.js";
 
 export function PostCreate() {
     const navigate = useNavigate();
