@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
   return (
@@ -29,7 +30,8 @@ const Header = () => {
         {/* Title & Description Centered */}
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            Blog Posts
+            <NavLink to="/">Blog Posts</NavLink>
+
           </h1>
           <p className="mt-1 text-sm text-gray-500">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -41,7 +43,7 @@ const Header = () => {
           className="rounded bg-indigo-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 "
           type="button"
         >
-          Create Post
+          <NavLink to="postcreate">Create Post</NavLink>
         </button>
       </div>
     </header>

@@ -30,7 +30,7 @@ const PostDetails = () => {
 
     const handleOnClickSave = async (e) => {
         e.preventDefault();
-
+        if (!updatedPost.title || !updatedPost.cover || !updatedPost.content) return alert('All fields except the author field must be filled in.');
         // Collect data from refs
         const formData = {
             title: updatedPost.title,
@@ -43,10 +43,10 @@ const PostDetails = () => {
             await updatePostById(updatedPost.id, formData);
             setPost(updatedPost)// Call API function
         } catch (error) {
-            console.error("Error update event:", error);
+            console.error("Error update post:", error);
         } finally {
             setIsUpdate(!isUpdate);
-            navigation(`/postcard/${post.id}`)
+            navigate(`/postcard/${post.id}`)
         }
     };
 
@@ -75,6 +75,10 @@ const PostDetails = () => {
         }
     }
 
+
+    function handleClose() {
+        navigate("/")
+    }
 
     return isLoading ? (
         <Spinner/>
@@ -145,7 +149,7 @@ const PostDetails = () => {
                     className=" px-4 py-4 rounded-xl m-auto text-gray-50 focus:outline-none active:outline-none border-none antialiased bg-indigo-600 bg-opacity-90 hover:bg-indigo-700"
                     onClick={handleOnClickSave}
                 >
-                Save
+                    Save
                 </button>
                 <button
                     type="button"
@@ -159,11 +163,20 @@ const PostDetails = () => {
     </div>) : (
         <div className="w-full flex justify-center items-center pt-10">
             <div className="w-full max-w-[500px] m-auto px-10 py-10 border-black rounded-xl shadow-2xl">
+                <div className="flex justify-end">
+                    <button
+                        type="button"
+                        className="text-gray-600 hover:text-red-600 text-4xl"
+                        onClick={handleClose}
+                    >
+                        &times;
+                    </button>
+                </div>
                 <h2 className="text-3xl text-center font-thin">
-                Post Details
+                    Post Details
                 </h2>
                 <div className="w-full flex justify-center mb-6 mt-6">
-                    <img
+                <img
                         src={post.cover || "IMAGE =)"}
                         alt="Post Image"
                         className="w-1/2 h-auto rounded-xl object-cover"
