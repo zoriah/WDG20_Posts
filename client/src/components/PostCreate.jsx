@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {createPost} from "../api/posts.js";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createPost } from "../api/posts.js";
 
 export function PostCreate() {
     const navigate = useNavigate();
 
-    const [post, setPost] = useState("");
+    const [post, setPost] = useState({});
 
     const handleOnClickSave = async (e) => {
         e.preventDefault();
@@ -29,7 +29,7 @@ export function PostCreate() {
     };
 
     const handleChange = (event) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setPost((prevPost) => ({
             ...prevPost,
             [name]: value,
@@ -37,7 +37,7 @@ export function PostCreate() {
     };
 
     async function handleOnClickClose() {
-            navigate("/");
+        navigate("/");
     }
     return (
         <div className="w-full flex justify-center items-center pt-10">
@@ -58,7 +58,6 @@ export function PostCreate() {
                         id="title"
                         name="title"
                         type="text"
-                        value={post.title}
                         onChange={handleChange}
                         placeholder="Title"
                         className="w-full p-2 border rounded focus:outline-none active:outline-none antialiased"
@@ -70,7 +69,6 @@ export function PostCreate() {
                         id="url"
                         name="cover"
                         type="text"
-                        value={post.cover}
                         onChange={handleChange}
                         placeholder="Image URL"
                         className="w-full p-2 border rounded focus:outline-none active:outline-none antialiased"
@@ -82,7 +80,6 @@ export function PostCreate() {
                         id="author"
                         name="author"
                         type="text"
-                        value={post.author}
                         onChange={handleChange}
                         placeholder="Author"
                         className="w-full p-2 border rounded focus:outline-none active:outline-none antialiased"
@@ -95,7 +92,6 @@ export function PostCreate() {
                         id="content"
                         name="content"
                         type="text"
-                        value={post.content}
                         onChange={handleChange}
                         placeholder="Content"
                         className="w-full p-2 border rounded focus:outline-none active:outline-none antialiased"
