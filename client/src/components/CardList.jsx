@@ -1,39 +1,37 @@
 import { useEffect, useState } from "react";
-// import {getPosts} from "../mock/testPosts.js";
+import { getPosts } from "../api/posts.js";
 import { Spinner } from "./Spinner.jsx";
 import { PostCard } from "./PostCard.jsx";
-import axios from "axios"
 
 export function CardList() {
-    const [posts, setPosts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
     const fetchPosts = async () => {
+      try {
         setIsLoading(true);
-        try {
-            const fetchPosts = await axios.get(import.meta.env.VITE_BACKEND + "/posts")
-            setPosts(fetchPosts.data.getPosts);
-            console.log(fetchPosts.data.getPosts)
+        const data = await getPosts();
+        setPosts(data);
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-        } catch (err) {
-            console.error(err.message);
-        } finally {
-            setIsLoading(false);
-        }
-        // fetchPosts()
-    }
-    useEffect(() => {
-        fetchPosts()
-    }, []);
+    fetchPosts();
+  }, []);
 
-    return isLoading ? (
-        <Spinner />
-    ) : (
-        <div className='p-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4'>
-            {posts ? (
-                posts.map((el) => <PostCard key={el.id} post={el} />)
-            ) : (
-                <h2>There are currently no posts, please check back later.</h2>
-            )}
-        </div>
-    );
+  return isLoading ? (
+    <Spinner />
+  ) : (
+    <div className="p-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      {posts ? (
+        posts.map((el) => (<PostCard key={el.id} post={el} />))
+      ) : (
+        <h2>There are currently no posts, please check back later.</h2>
+      )}
+    </div>
+  );
 }
