@@ -1,5 +1,4 @@
 import axios from "axios";
-import config from "../config.js";
 
 export async function createPost(post) {
   try {
@@ -17,7 +16,7 @@ export async function createPost(post) {
 export async function getPosts() {
   try {
     const response = await axios.get(`${import.meta.env.VITE_POSTS_API}/posts`);
-    return response.data;
+    return response.data.getPosts;
   } catch (err) {
     alert("Something went wrong, please try again later.");
     console.error(err);
@@ -29,7 +28,7 @@ export async function getPostById(id) {
     const response = await axios.get(
       `${import.meta.env.VITE_POSTS_API}/posts/${id}`
     );
-    return response.data;
+    return response.data.post;
   } catch (err) {
     alert("Something went wrong, please try again later.");
     console.error(err);

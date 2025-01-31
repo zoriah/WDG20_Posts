@@ -28,7 +28,7 @@ export function CardList() {
   ) : (
     <div className="p-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
       {posts ? (
-        posts.map((el) => <PostCard key={el.id} post={el} />)
+        posts.map((el) => (<PostCard key={el.id} post={el} />))
       ) : (
         <h2>There are currently no posts, please check back later.</h2>
       )}

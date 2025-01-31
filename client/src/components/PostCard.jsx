@@ -4,7 +4,7 @@ export function PostCard(post) {
     const { id, title, content, cover } = post.post;
 
     return (
-        <Link to={`/post/${id}`}>
+        <Link to={`/postcard/${id}`}>
             <div className='card bg-base-100 shadow-xl'>
                 <figure className='bg-white h-48'>
                     <img src={cover} alt={title} className='object-cover h-full w-full'/>
